@@ -240,7 +240,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import api, { uploadUrl } from "../api/client";
+import api, { productImageUrl } from "../api/client";
 import toast from "react-hot-toast";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 import { motion } from "framer-motion";
@@ -417,7 +417,7 @@ export default function DashboardProducts() {
                   >
                     <td className="px-4 py-3">
                       <img
-                        src={uploadUrl(p.image)}
+                        src={productImageUrl(p)}
                         className="w-14 h-14 rounded-lg object-cover border"
                       />
                     </td>

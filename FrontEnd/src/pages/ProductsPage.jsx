@@ -832,7 +832,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useSearchParams } from "react-router-dom";
-import api, { uploadUrl } from "../api/client";
+import api, { productImageUrl } from "../api/client";
 
 export default function ProductsPage() {
   const [items, setItems] = useState([]);
@@ -1024,7 +1024,7 @@ export default function ProductsPage() {
                 >
                   <div className="w-full h-72 bg-gradient-to-br from-slate-50 to-white flex items-center justify-center p-4 border-b border-gray-100">
                     <img
-                      src={uploadUrl(p.image)}
+                      src={productImageUrl(p)}
                       alt={p.name}
                       className="max-w-full max-h-full object-contain"
                       onError={(e) => {

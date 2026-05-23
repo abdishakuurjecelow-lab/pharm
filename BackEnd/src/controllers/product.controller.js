@@ -268,7 +268,7 @@
 
 import Product from "../models/Product.js";
 import fs from "fs";
-import { findUploadFile } from "../utils/uploadPaths.js";
+import { findUploadFile, uploadUrl } from "../utils/uploadPaths.js";
 
 const HUMAN_CATEGORIES = [
   "Tablets",
@@ -306,10 +306,20 @@ function normalizeCategory(type, category) {
   return "";
 }
 
+function serializeProduct(product) {
+  const item = product.toObject ? product.toObject() : product;
+
+  return {
+    ...item,
+    imageUrl: uploadUrl(item.image),
+    imageFound: Boolean(item.image && findUploadFile(item.image)),
+  };
+}
+
 export async function listProducts(req, res) {
   try {
     const items = await Product.find().sort({ createdAt: -1 });
-    res.json(items);
+    res.json(items.map(serializeProduct));
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
@@ -319,7 +329,7 @@ export async function getProductById(req, res) {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) return res.status(404).json({ message: "Product not found" });
-    res.json(product);
+    res.json(serializeProduct(product));
   } catch {
     res.status(500).json({ message: "Server error" });
   }
@@ -347,7 +357,7 @@ export async function createProduct(req, res) {
       image,
     });
 
-    res.status(201).json(product);
+    res.status(201).json(serializeProduct(product));
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
@@ -387,7 +397,7 @@ export async function updateProduct(req, res) {
 
     await product.save();
 
-    res.json(product);
+    res.json(serializeProduct(product));
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }

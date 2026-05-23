@@ -59,6 +59,17 @@ function sendUpload(req, res, next) {
 app.get("/uploads/:filename", sendUpload);
 app.get("/api/uploads/:filename", sendUpload);
 
+app.get("/api/debug/uploads/:filename", (req, res) => {
+  const filePath = findUploadFile(req.params.filename);
+
+  res.json({
+    filename: req.params.filename,
+    found: Boolean(filePath),
+    foundPath: filePath,
+    searchedDirs: uploadDirs,
+  });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 

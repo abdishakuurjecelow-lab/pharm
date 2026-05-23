@@ -22,6 +22,8 @@ export const API_URL =
 export const API_ORIGIN = API_URL.replace(/\/api\/?$/, "").replace(/\/$/, "");
 export const uploadUrl = (filename) =>
   !filename ? "/placeholder.png" : `${API_ORIGIN}/api/uploads/${filename}`;
+export const productImageUrl = (product) =>
+  !product?.image ? "/placeholder.png" : product.imageUrl || uploadUrl(product.image);
 
 const api = axios.create({ baseURL: `${API_ORIGIN}/api` });
 

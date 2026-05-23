@@ -8,12 +8,16 @@ const __dirname = path.dirname(__filename);
 export const backendRoot = path.resolve(__dirname, "../..");
 export const projectRoot = path.resolve(backendRoot, "..");
 export const primaryUploadDir = path.join(backendRoot, "uploads");
+const cwd = process.cwd();
 
 export const uploadDirs = [
   primaryUploadDir,
+  path.join(cwd, "uploads"),
+  path.join(cwd, "BackEnd", "uploads"),
   path.join(projectRoot, "uploads"),
   path.join(backendRoot, "public", "uploads"),
   path.join(projectRoot, "public", "uploads"),
+  path.join(cwd, "public", "uploads"),
   path.join(projectRoot, "FrontEnd", "public", "uploads"),
 ].filter((dir, index, dirs) => dirs.indexOf(dir) === index);
 
@@ -32,4 +36,9 @@ export function findUploadFile(filename = "") {
   }
 
   return null;
+}
+
+export function uploadUrl(filename = "") {
+  const safeName = path.basename(filename);
+  return safeName ? `/api/uploads/${encodeURIComponent(safeName)}` : "";
 }

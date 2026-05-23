@@ -296,7 +296,7 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import api, { uploadUrl } from "../api/client";
+import api, { productImageUrl } from "../api/client";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -315,7 +315,7 @@ export default function ProductDetails() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const imageSrc = uploadUrl(product?.image);
+  const imageSrc = productImageUrl(product);
 
   const whatsappText = product
     ? `Hello, I want to order this product:
