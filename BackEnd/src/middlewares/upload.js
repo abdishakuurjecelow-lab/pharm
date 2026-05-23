@@ -6,7 +6,9 @@ ensureUploadDir();
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, primaryUploadDir),
   filename: (_req, file, cb) => {
-    const safeName = file.originalname.replace(/\s+/g, "_");
+    const safeName = file.originalname
+      .replace(/[\\/]/g, "_")
+      .replace(/\s+/g, "_");
     cb(null, `${Date.now()}-${safeName}`);
   },
 });

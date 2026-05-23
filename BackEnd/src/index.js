@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 import productRoutes from "./Routes/product.routes.js";
 import authRoutes from "./Routes/auth.routes.js";
 import { connectDB } from "./db.js";
-import { findUploadFile, uploadDirs } from "./utils/uploadPaths.js";
+import { debugUploadSearch, findUploadFile, uploadDirs } from "./utils/uploadPaths.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -60,14 +60,7 @@ app.get("/uploads/:filename", sendUpload);
 app.get("/api/uploads/:filename", sendUpload);
 
 app.get("/api/debug/uploads/:filename", (req, res) => {
-  const filePath = findUploadFile(req.params.filename);
-
-  res.json({
-    filename: req.params.filename,
-    found: Boolean(filePath),
-    foundPath: filePath,
-    searchedDirs: uploadDirs,
-  });
+  res.json(debugUploadSearch(req.params.filename));
 });
 
 app.use("/api/auth", authRoutes);

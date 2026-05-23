@@ -268,7 +268,7 @@
 
 import Product from "../models/Product.js";
 import fs from "fs";
-import { findUploadFile, uploadUrl } from "../utils/uploadPaths.js";
+import { findUploadFile, primaryUploadDir, uploadUrl } from "../utils/uploadPaths.js";
 
 const HUMAN_CATEGORIES = [
   "Tablets",
@@ -316,6 +316,17 @@ function serializeProduct(product) {
   };
 }
 
+function uploadedImageName(file) {
+  if (!file) return "";
+
+  const filePath = file.path || `${primaryUploadDir}/${file.filename}`;
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Uploaded image was not saved: ${file.filename}`);
+  }
+
+  return file.filename;
+}
+
 export async function listProducts(req, res) {
   try {
     const items = await Product.find().sort({ createdAt: -1 });
@@ -347,7 +358,7 @@ export async function createProduct(req, res) {
       return res.status(400).json({ message: "Invalid product type" });
     }
 
-    const image = req.file ? req.file.filename : "";
+    const image = uploadedImageName(req.file);
     const safeCategory = normalizeCategory(type, category);
 
     const product = await Product.create({
@@ -367,7 +378,7 @@ export async function updateProduct(req, res) {
   try {
     const { id } = req.params;
     const { name, category = "", type } = req.body;
-    const image = req.file ? req.file.filename : undefined;
+    const image = req.file ? uploadedImageName(req.file) : undefined;
 
     const product = await Product.findById(id);
 

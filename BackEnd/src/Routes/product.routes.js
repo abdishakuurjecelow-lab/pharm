@@ -56,6 +56,7 @@ router.post("/", auth, upload.single("image"), createProduct);
 
 // ✅ PATCH /api/products/:id - update product (auth + upload)
 router.patch("/:id", auth, upload.single("image"), updateProduct);
+router.put("/:id", auth, upload.single("image"), updateProduct);
 
 // ✅ DELETE /api/products/:id - delete product (auth)
 router.delete("/:id", auth, deleteProduct);
