@@ -240,13 +240,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import api, { API_URL } from "../api/client";
+import api, { uploadUrl } from "../api/client";
 import toast from "react-hot-toast";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 import { motion } from "framer-motion";
-
-const API = API_URL;
-const imgUrl = (p) => (!p ? "/placeholder.png" : `${API}/uploads/${p}`);
 
 export default function DashboardProducts() {
   const [items, setItems] = useState([]);
@@ -420,7 +417,7 @@ export default function DashboardProducts() {
                   >
                     <td className="px-4 py-3">
                       <img
-                        src={imgUrl(p.image)}
+                        src={uploadUrl(p.image)}
                         className="w-14 h-14 rounded-lg object-cover border"
                       />
                     </td>

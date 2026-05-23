@@ -19,8 +19,11 @@ import axios from "axios";
 export const API_URL =
   import.meta.env.VITE_API_URL || "https://al-ainpharma.com";
 
-const API = API_URL.replace(/\/api\/?$/, "").replace(/\/$/, "");
-const api = axios.create({ baseURL: `${API}/api` });
+export const API_ORIGIN = API_URL.replace(/\/api\/?$/, "").replace(/\/$/, "");
+export const uploadUrl = (filename) =>
+  !filename ? "/placeholder.png" : `${API_ORIGIN}/api/uploads/${filename}`;
+
+const api = axios.create({ baseURL: `${API_ORIGIN}/api` });
 
 // Ku lifaaq token-ka haddii uu jiro
 api.interceptors.request.use((cfg) => {

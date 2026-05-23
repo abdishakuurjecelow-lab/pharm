@@ -349,12 +349,10 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api, { API_URL } from "../api/client"; // Ensure this is the correct path
+import api from "../api/client"; // Ensure this is the correct path
 import toast from "react-hot-toast";
 
 const CATS = ["Tablets", "Cap", "Injection", "Syrup", "Veterinary Medicine"];
-const API = API_URL;
-
 export default function DashboardEditProduct() {
   const { id } = useParams(); // Get product ID from URL
   const [form, setForm] = useState({

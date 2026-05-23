@@ -296,11 +296,10 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import api, { API_URL } from "../api/client";
+import api, { uploadUrl } from "../api/client";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
-const API = API_URL;
 const WHATSAPP_NUMBER = "252615896669";
 
 export default function ProductDetails() {
@@ -316,9 +315,7 @@ export default function ProductDetails() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const imageSrc = product?.image
-    ? `${API}/uploads/${product.image}`
-    : "/placeholder.png";
+  const imageSrc = uploadUrl(product?.image);
 
   const whatsappText = product
     ? `Hello, I want to order this product:

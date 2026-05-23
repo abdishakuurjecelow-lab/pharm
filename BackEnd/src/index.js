@@ -44,7 +44,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.use("/uploads", express.static(path.join(backendRoot, "uploads")));
+const uploadsPath = path.join(backendRoot, "uploads");
+
+app.use("/uploads", express.static(uploadsPath));
+app.use("/api/uploads", express.static(uploadsPath));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);

@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import api, { API_URL } from "../api/client";
-
-const API = API_URL;
-
-const imgUrl = (p) => (!p ? "/placeholder.png" : `${API}/uploads/${p}`);
+import api, { uploadUrl } from "../api/client";
 
 export default function FeaturedProducts() {
   const [items, setItems] = useState([]);
@@ -97,7 +93,7 @@ export default function FeaturedProducts() {
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={imgUrl(item.image)}
+                      src={uploadUrl(item.image)}
                       alt={item.name}
                       className="h-56 w-full object-cover transition duration-300 group-hover:scale-105"
                       onError={(e) => {

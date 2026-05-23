@@ -624,7 +624,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../api/client";
+import api, { uploadUrl } from "../api/client";
 import toast from "react-hot-toast";
 
 const TYPES = ["Human", "Veterinary", "AGRO Bio Chemical"];
@@ -751,7 +751,7 @@ export default function DashboardAddProduct() {
   const imgSrc = file
     ? URL.createObjectURL(file)
     : form.image
-    ? `${api.defaults.baseURL.replace(/\/api$/, "")}/uploads/${form.image}`
+    ? uploadUrl(form.image)
     : "";
 
   if (loading) {
