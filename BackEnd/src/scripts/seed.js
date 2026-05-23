@@ -1,8 +1,16 @@
-import "dotenv/config";
 import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
 import Product from "../models/Product.js";
 import User from "../models/User.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const backendRoot = path.resolve(__dirname, "../..");
+
+dotenv.config({ path: path.join(backendRoot, ".env") });
 
 const products = [
   { name: "Tumcido", category: "Syrups", type: "Human", image: "1760168167980-Tumcido.jfif" },
@@ -64,16 +72,12 @@ const admins = [
   { name: "abdinasir", email: "abdinasirabuukar@gmail.com" },
 ];
 
-const mongoUri = process.env.MONGO_URI;
+const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/alain_pharma";
+const dbName = process.env.MONGO_DB_NAME || "alain_pharma";
 const adminPassword = process.env.SEED_ADMIN_PASSWORD || "Admin@123456";
 
-if (!mongoUri) {
-  console.error("Missing MONGO_URI in .env");
-  process.exit(1);
-}
-
 async function seed() {
-  await mongoose.connect(mongoUri, { dbName: "alain_pharma" });
+  await mongoose.connect(mongoUri, { dbName });
 
   const password = await bcrypt.hash(adminPassword, 10);
 
@@ -105,6 +109,7 @@ async function seed() {
   );
 
   console.log(`Seed complete: ${products.length} products and ${admins.length} admin users.`);
+  console.log(`MongoDB database: ${dbName}`);
   console.log(`Admin login email: ${admins[1].email}`);
   console.log(`Admin login password: ${adminPassword}`);
 

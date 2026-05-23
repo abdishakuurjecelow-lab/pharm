@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "cleanup:products": "node src/scripts/cleanupProducts.js",
-    "seed": "node src/scripts/seed.js"
+    "seed": "node seed.js"
   },
 
   "dependencies": {

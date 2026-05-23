@@ -1,31 +1,14 @@
-// import mongoose from "mongoose";
-
-// export default async function connectDB() {
-//   const uri = process.env.MONGO_URI;
-//   if (!uri) throw new Error("MONGO_URI missing in .env");
-//   mongoose.set("strictQuery", true);
-//   await mongoose.connect(uri);
-//   console.log("✅ MongoDB connected");
-// }
-
-
-//LAsttttttttttttttttttttttt
-
-// src/db.js
 import mongoose from "mongoose";
 
-const uri = process.env.MONGO_URI;
-if (!uri) {
-  console.error("❌ Missing MONGO_URI in .env");
-  process.exit(1);
-}
+const uri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/alain_pharma";
+const dbName = process.env.MONGO_DB_NAME || "alain_pharma";
 
 export async function connectDB() {
   try {
-    await mongoose.connect(uri, { dbName: "alain_pharma" });
-    console.log("✅ MongoDB connected");
+    await mongoose.connect(uri, { dbName });
+    console.log(`MongoDB connected: ${dbName}`);
   } catch (err) {
-    console.error("❌ MongoDB error:", err.message);
+    console.error("MongoDB error:", err.message);
     process.exit(1);
   }
 }
