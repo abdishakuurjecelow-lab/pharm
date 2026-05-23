@@ -123,7 +123,7 @@ export default function Login() {
   const { login } = useAuth();
   const nav = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/dashboard";
+  const from = location.state?.from?.pathname?.replace(/^\/dashboard/, "/kaalay") || "/kaalay";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

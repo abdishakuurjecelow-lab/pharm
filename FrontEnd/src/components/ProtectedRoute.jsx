@@ -14,7 +14,7 @@ export default function ProtectedRoute({ roles, children }) {
   }
 
   // hadduu user maqan yahay -> login u dir adigoo wadanaya halka uu rabay
-  if (!user) return <Navigate to="/login" replace state={{ from: location }} />;
+  if (!user) return <Navigate to="/soogeli" replace state={{ from: location }} />;
 
   if (roles?.length && !roles.includes(user.role)) return <Navigate to="/" replace />;
   return children || <Outlet />;

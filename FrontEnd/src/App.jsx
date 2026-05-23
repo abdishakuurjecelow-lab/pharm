@@ -1,6 +1,6 @@
 //New-----------------------------
 
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./store/auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
@@ -23,7 +23,7 @@ import DashboardAddProduct from "./pages/DashboardAddProduct";
 
 function Shell({ children }) {
   const location = useLocation();
-  const isDash = location.pathname.startsWith("/dashboard");
+  const isDash = location.pathname.startsWith("/kaalay");
 
   return (
     <>
@@ -61,11 +61,12 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/soogeli" element={<Login />} />
+            <Route path="/login" element={<Navigate to="/soogeli" replace />} />
             <Route path="/signup" element={<Signup />} />
 
             <Route
-              path="/dashboard"
+              path="/kaalay"
               element={
                 <ProtectedRoute roles={["admin"]}>
                   <DashboardLayout />
@@ -79,6 +80,8 @@ export default function App() {
               {/* HALKAN AYAA LA SAXAY */}
               <Route path="edit-product/:id" element={<DashboardAddProduct />} />
             </Route>
+
+            <Route path="/dashboard/*" element={<Navigate to="/kaalay" replace />} />
 
             <Route
               path="*"

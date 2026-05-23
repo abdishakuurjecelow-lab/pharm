@@ -16,7 +16,7 @@ export default function Signup() {
     setErr(""); setLoading(true);
     try {
       const u = await signup(name, email, password);
-      nav(u?.role === "admin" ? "/dashboard" : "/", { replace: true });
+      nav(u?.role === "admin" ? "/kaalay" : "/", { replace: true });
     } catch (e) {
       setErr(e?.response?.data?.message || "Signup failed");
     } finally {
@@ -79,7 +79,7 @@ export default function Signup() {
 
             <p className="mt-4 text-center text-sm text-slate-500">
               Already have an account?{" "}
-              <Link to="/login" className="font-semibold text-teal-600 hover:underline">
+              <Link to="/soogeli" className="font-semibold text-teal-600 hover:underline">
                 Login
               </Link>
             </p>

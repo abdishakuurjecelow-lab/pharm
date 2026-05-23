@@ -684,7 +684,7 @@ export default function DashboardAddProduct() {
         });
       } catch {
         toast.error("Product not found");
-        nav("/dashboard/products");
+        nav("/kaalay/products");
       } finally {
         setLoading(false);
       }
@@ -740,7 +740,7 @@ export default function DashboardAddProduct() {
         toast.success("Product added successfully");
       }
 
-      nav("/dashboard/products");
+      nav("/kaalay/products");
     } catch {
       toast.error("Save failed");
     } finally {

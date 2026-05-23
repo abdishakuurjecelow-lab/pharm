@@ -405,7 +405,7 @@ export default function DashboardEditProduct() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Product updated successfully");
-      navigate("/dashboard/products"); // Redirect back to product list
+      navigate("/kaalay/products"); // Redirect back to product list
     } catch (e) {
       toast.error("Update failed");
     } finally {
@@ -469,7 +469,7 @@ export default function DashboardEditProduct() {
         <div className="flex gap-4 mt-6">
           <button
             type="button"
-            onClick={() => navigate("/dashboard/products")}
+            onClick={() => navigate("/kaalay/products")}
             className="w-full py-2 bg-gray-400 text-white rounded"
           >
             Cancel

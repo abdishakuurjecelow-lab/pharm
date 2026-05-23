@@ -330,7 +330,7 @@ export default function DashboardProducts() {
         </div>
 
         <Link
-          to="/dashboard/add-product"
+          to="/kaalay/add-product"
           className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-xl font-semibold transition"
         >
           <Plus size={18} />
@@ -439,7 +439,7 @@ export default function DashboardProducts() {
                     <td className="px-4 py-3 text-right">
                       <div className="flex justify-end gap-2">
                         <Link
-                          to={`/dashboard/edit-product/${p._id}`}
+                          to={`/kaalay/edit-product/${p._id}`}
                           className="px-3 py-1.5 border rounded-lg text-sm hover:bg-gray-100"
                         >
                           <Pencil size={14} />

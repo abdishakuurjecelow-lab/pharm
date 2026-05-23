@@ -10,8 +10,8 @@ export default function AdminLayout() {
   const nav = useNavigate();
 
   const menus = [
-    { name: "Dashboard", path: "/dashboard", icon: <FiHome /> },
-    { name: "Products", path: "/dashboard/products", icon: <FiBox /> },
+    { name: "Dashboard", path: "/kaalay", icon: <FiHome /> },
+    { name: "Products", path: "/kaalay/products", icon: <FiBox /> },
   ];
 
   return (
@@ -56,7 +56,7 @@ export default function AdminLayout() {
             <button
               onClick={() => {
                 logout();
-                nav("/login", { replace: true });
+                nav("/soogeli", { replace: true });
               }}
               className="flex w-full items-center gap-3 rounded-lg p-2 hover:bg-rose-600 transition"
             >

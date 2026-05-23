@@ -168,7 +168,6 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaFacebookF,
-  FaLock,
 } from "react-icons/fa";
 
 export default function Footer() {
@@ -215,20 +214,6 @@ export default function Footer() {
                 <FaFacebookF />
               </a>
 
-              <motion.div
-                whileHover={{ y: -3, scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link
-                  to="/login"
-                  className="group inline-flex items-center gap-2 rounded-full border border-green-300/30 bg-white/10 px-4 py-2 text-sm font-semibold text-green-200 shadow-[0_8px_25px_rgba(34,197,94,0.12)] backdrop-blur transition hover:border-green-300 hover:bg-green-400 hover:text-slate-950"
-                >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-400/20 text-green-200 transition group-hover:bg-slate-950/10 group-hover:text-slate-950">
-                    <FaLock size={12} />
-                  </span>
-                  Login
-                </Link>
-              </motion.div>
             </div>
           </motion.div>
 
@@ -307,10 +292,10 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <FaEnvelope className="mt-1 text-green-300" />
                 <a
-                  href="mailto:al-ainpharma@gmail.com"
+                  href="mailto:aphco655315@gmail.com"
                   className="hover:text-green-300 transition break-all"
                 >
-                  al-ainpharma@gmail.com
+                  aphco655315@gmail.com
                 </a>
               </li>
 

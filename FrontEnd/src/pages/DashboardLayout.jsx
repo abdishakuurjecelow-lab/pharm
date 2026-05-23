@@ -662,17 +662,17 @@ export default function DashboardLayout() {
           </div>
 
           <div className="space-y-2">
-            <NavLink to="/dashboard" end className={navItemClass}>
+            <NavLink to="/kaalay" end className={navItemClass}>
               <LayoutDashboard size={18} />
               Dashboard
             </NavLink>
 
-            <NavLink to="/dashboard/products" className={navItemClass}>
+            <NavLink to="/kaalay/products" className={navItemClass}>
               <Package2 size={18} />
               Products
             </NavLink>
 
-            <NavLink to="/dashboard/add-product" className={navItemClass}>
+            <NavLink to="/kaalay/add-product" className={navItemClass}>
               <PlusSquare size={18} />
               Add Product
             </NavLink>
@@ -682,7 +682,7 @@ export default function DashboardLayout() {
             <button
               onClick={() => {
                 logout();
-                nav("/login");
+                nav("/soogeli");
               }}
               className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/10 hover:text-white"
             >

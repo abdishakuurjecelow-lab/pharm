@@ -8,14 +8,14 @@ export default function DashboardSelectType() {
       <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl">
 
         <div
-          onClick={() => nav("/dashboard/add-human")}
+          onClick={() => nav("/kaalay/add-human")}
           className="cursor-pointer bg-teal-600 text-white p-12 rounded-3xl shadow-xl text-center hover:scale-105 transition"
         >
           <h2 className="text-3xl font-bold">Human Products</h2>
         </div>
 
         <div
-          onClick={() => nav("/dashboard/add-veterinary")}
+          onClick={() => nav("/kaalay/add-veterinary")}
           className="cursor-pointer bg-blue-600 text-white p-12 rounded-3xl shadow-xl text-center hover:scale-105 transition"
         >
           <h2 className="text-3xl font-bold">Veterinary Products</h2>
