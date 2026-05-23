@@ -268,9 +268,7 @@
 
 import Product from "../models/Product.js";
 import fs from "fs";
-import path from "path";
-
-const uploadPath = path.join(process.cwd(), "uploads");
+import { findUploadFile } from "../utils/uploadPaths.js";
 
 const HUMAN_CATEGORIES = [
   "Tablets",
@@ -368,8 +366,8 @@ export async function updateProduct(req, res) {
     }
 
     if (image && product.image) {
-      const oldPath = path.join(uploadPath, product.image);
-      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      const oldPath = findUploadFile(product.image);
+      if (oldPath && fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
     }
 
     if (typeof name === "string" && name.trim()) {
@@ -406,8 +404,8 @@ export async function deleteProduct(req, res) {
     }
 
     if (product.image) {
-      const imgPath = path.join(uploadPath, product.image);
-      if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+      const imgPath = findUploadFile(product.image);
+      if (imgPath && fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
     }
 
     await product.deleteOne();

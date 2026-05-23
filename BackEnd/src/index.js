@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import productRoutes from "./Routes/product.routes.js";
 import authRoutes from "./Routes/auth.routes.js";
 import { connectDB } from "./db.js";
+import { findUploadFile, uploadDirs } from "./utils/uploadPaths.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,10 +45,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-const uploadsPath = path.join(backendRoot, "uploads");
+for (const uploadDir of uploadDirs) {
+  app.use("/uploads", express.static(uploadDir));
+  app.use("/api/uploads", express.static(uploadDir));
+}
 
-app.use("/uploads", express.static(uploadsPath));
-app.use("/api/uploads", express.static(uploadsPath));
+function sendUpload(req, res, next) {
+  const filePath = findUploadFile(req.params.filename);
+  if (!filePath) return next();
+  return res.sendFile(filePath);
+}
+
+app.get("/uploads/:filename", sendUpload);
+app.get("/api/uploads/:filename", sendUpload);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
