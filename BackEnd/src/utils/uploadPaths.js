@@ -122,7 +122,7 @@ export function findUploadFile(filename = "") {
 
 export function uploadUrl(filename = "") {
   const safeName = path.basename(filename);
-  return safeName ? `/api/uploads/${encodeURIComponent(safeName)}` : "";
+  return safeName ? `/api/image?name=${encodeURIComponent(safeName)}` : "";
 }
 
 export function debugUploadSearch(filename = "") {

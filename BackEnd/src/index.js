@@ -59,8 +59,18 @@ function sendUpload(req, res, next) {
 app.get("/uploads/:filename", sendUpload);
 app.get("/api/uploads/:filename", sendUpload);
 
+app.get("/api/image", (req, res, next) => {
+  const filePath = findUploadFile(String(req.query.name || ""));
+  if (!filePath) return next();
+  return res.sendFile(filePath);
+});
+
 app.get("/api/debug/uploads/:filename", (req, res) => {
   res.json(debugUploadSearch(req.params.filename));
+});
+
+app.get("/api/debug/image", (req, res) => {
+  res.json(debugUploadSearch(String(req.query.name || "")));
 });
 
 app.use("/api/auth", authRoutes);
