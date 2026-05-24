@@ -27,6 +27,10 @@ const recursiveSearchRoots = [
   cwd,
 ].filter((dir, index, dirs) => dirs.indexOf(dir) === index);
 
+function uploadBaseName(filename = "") {
+  return path.basename(filename).replace(/^\d+-/, "").toLowerCase();
+}
+
 export function ensureUploadDir() {
   if (!fs.existsSync(primaryUploadDir)) {
     fs.mkdirSync(primaryUploadDir, { recursive: true });
@@ -59,6 +63,37 @@ function findFileRecursive(dir, safeName, depth = 0) {
   return null;
 }
 
+function findFileByUploadBaseName(dir, safeName, depth = 0) {
+  if (depth > 4 || !fs.existsSync(dir)) return null;
+
+  const targetBaseName = uploadBaseName(safeName);
+  if (!targetBaseName) return null;
+
+  let entries = [];
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return null;
+  }
+
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isFile() && uploadBaseName(entry.name) === targetBaseName) {
+      return entryPath;
+    }
+
+    if (
+      entry.isDirectory() &&
+      !["node_modules", ".git", "dist"].includes(entry.name)
+    ) {
+      const found = findFileByUploadBaseName(entryPath, safeName, depth + 1);
+      if (found) return found;
+    }
+  }
+
+  return null;
+}
+
 export function findUploadFile(filename = "") {
   const safeName = path.basename(filename);
 
@@ -69,6 +104,16 @@ export function findUploadFile(filename = "") {
 
   for (const root of recursiveSearchRoots) {
     const found = findFileRecursive(root, safeName);
+    if (found) return found;
+  }
+
+  for (const dir of uploadDirs) {
+    const found = findFileByUploadBaseName(dir, safeName);
+    if (found) return found;
+  }
+
+  for (const root of recursiveSearchRoots) {
+    const found = findFileByUploadBaseName(root, safeName);
     if (found) return found;
   }
 
@@ -86,6 +131,7 @@ export function debugUploadSearch(filename = "") {
 
   return {
     filename: safeName,
+    fallbackBaseName: uploadBaseName(safeName),
     found: Boolean(foundPath),
     foundPath,
     directPaths: uploadDirs.map((dir) => path.join(dir, safeName)),
