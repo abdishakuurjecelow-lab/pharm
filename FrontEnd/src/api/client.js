@@ -16,8 +16,22 @@
 
 import axios from "axios";
 
-export const API_URL =
+const configuredApiUrl =
   import.meta.env.VITE_API_URL || "https://al-ainpharma.com";
+
+const browserOrigin =
+  typeof window !== "undefined" ? window.location.origin : "";
+
+const isProductionBrowser =
+  typeof window !== "undefined" &&
+  !["localhost", "127.0.0.1"].includes(window.location.hostname);
+
+const isLocalApi = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i.test(
+  configuredApiUrl
+);
+
+export const API_URL =
+  isProductionBrowser && isLocalApi ? browserOrigin : configuredApiUrl;
 
 export const API_ORIGIN = API_URL.replace(/\/api\/?$/, "").replace(/\/$/, "");
 export const uploadUrl = (filename) =>
