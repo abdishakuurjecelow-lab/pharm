@@ -627,7 +627,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api, { uploadUrl } from "../api/client";
 import toast from "react-hot-toast";
 
-const TYPES = ["Human", "Veterinary", "AGRO Bio Chemical"];
+const TYPES = ["Human", "Veterinary", "Agrochemicals"];
 
 const HUMAN_CATEGORIES = [
   "Tablets",
@@ -635,10 +635,10 @@ const HUMAN_CATEGORIES = [
   "Injections",
   "Drops",
   "Syrups",
-  "Shampoo",
+  "Shampoos",
   "Creams",
   "Infusions",
-  "Disposals",
+  "Disposables",
 ];
 
 const VETERINARY_CATEGORIES = [
@@ -700,7 +700,7 @@ export default function DashboardAddProduct() {
       if (!VETERINARY_CATEGORIES.includes(form.category)) {
         setForm((f) => ({ ...f, category: "Tablets & Bollus" }));
       }
-    } else if (form.type === "AGRO Bio Chemical") {
+    } else if (form.type === "Agrochemicals") {
       if (form.category !== "") {
         setForm((f) => ({ ...f, category: "" }));
       }
@@ -720,7 +720,7 @@ export default function DashboardAddProduct() {
       fd.append("name", form.name.trim());
       fd.append("type", form.type);
 
-      if (form.type !== "AGRO Bio Chemical") {
+      if (form.type !== "Agrochemicals") {
         fd.append("category", form.category);
       } else {
         fd.append("category", "");
@@ -740,7 +740,11 @@ export default function DashboardAddProduct() {
         toast.success("Product added successfully");
       }
 
-      nav("/kaalay/products");
+      nav(
+        form.type === "Agrochemicals"
+          ? "/kaalay/products?type=AGRO%20Bio%20Chemical"
+          : "/kaalay/products"
+      );
     } catch {
       toast.error("Save failed");
     } finally {
@@ -790,7 +794,7 @@ export default function DashboardAddProduct() {
           ))}
         </select>
 
-        {form.type !== "AGRO Bio Chemical" && (
+        {form.type !== "Agrochemicals" && (
           <select
             name="category"
             value={form.category}
@@ -841,7 +845,7 @@ export default function DashboardAddProduct() {
         <div className="p-5">
           <p className="text-xs text-slate-400">{form.type}</p>
           <p className="text-xs text-slate-500 mt-1">
-            {form.type === "AGRO Bio Chemical" ? "No category" : form.category}
+            {form.type === "Agrochemicals" ? "No category" : form.category}
           </p>
           <h3 className="text-lg font-bold mt-2">
             {form.name || "Product name"}

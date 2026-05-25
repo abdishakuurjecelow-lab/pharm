@@ -256,8 +256,8 @@ export default function Home() {
                   className="mt-4 max-w-2xl text-base sm:text-lg text-slate-600 leading-8"
                 >
                   We support bulk orders, trusted distribution, and dependable
-                  pharmaceutical supply for human, veterinary, and agro  bio
-                  chemical needs across Somalia.
+                  pharmaceutical supply for human, veterinary, and
+                  AGRO Bio Chemical needs across Somalia.
                 </motion.p>
 
                 <motion.div
@@ -311,3 +311,4 @@ export default function Home() {
     </main>
   );
 }
+

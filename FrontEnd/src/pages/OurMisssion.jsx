@@ -16,7 +16,13 @@ const cards = [
   {
     title: "Values",
     icon: <FaHandshake className="text-lime-600 text-2xl" />,
-    desc: "Ensure consistent supply of high-quality medicines compliant with international standards.  Contribute to the improvement of public health in East Africa and beyond Collaborate with government and healthcare organizations. Uphold Islamic values and Somali cultural principles. Support communities during emergencies and natural disasters.",
+    values: [
+      "Ensure consistent supply of high-quality medicines compliant with international standards.",
+      "Contribute to the improvement of public health in East Africa and beyond.",
+      "Collaborate with government and healthcare organizations.",
+      "Uphold Islamic values and Somali cultural principles.",
+      "Support communities during emergencies and natural disasters.",
+    ],
   },
 ];
 
@@ -45,7 +51,15 @@ export default function OurMisssion() {
             >
               <div className="mb-5">{item.icon}</div>
               <h3 className="text-2xl font-bold">{item.title}</h3>
-              <p className="mt-4 text-gray-600">{item.desc}</p>
+              {item.values ? (
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-gray-600">
+                  {item.values.map((value) => (
+                    <li key={value}>{value}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 text-gray-600">{item.desc}</p>
+              )}
             </motion.div>
           ))}
         </div>

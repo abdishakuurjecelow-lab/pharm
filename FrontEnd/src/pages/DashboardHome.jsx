@@ -381,7 +381,7 @@
 //     {
 //       title: "Product Types",
 //       value: totalTypes,
-//       note: "Human, Veterinary, AGRO & Bio Chemical",
+//       note: "Human, Veterinary, AGRO Bio Chemical",
 //       icon: <ShieldCheck size={22} />,
 //       style:
 //         "from-sky-500 via-cyan-500 to-blue-500",
@@ -493,12 +493,12 @@
 
 //               <div className="col-span-2 rounded-2xl bg-slate-50 p-4 text-center ring-1 ring-slate-100">
 //                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-//                   AGRO & Bio Chemical
+//                   AGRO Bio Chemical
 //                 </p>
 //                 <p className="mt-2 text-2xl font-black text-slate-900">
 //                   {loading
 //                     ? "..."
-//                     : products.filter((p) => p.type === "AGRO & Bio Chemical").length}
+//                     : products.filter((p) => p.type === "AGRO Bio Chemical").length}
 //                 </p>
 //               </div>
 //             </div>
@@ -728,3 +728,5 @@ export default function DashboardHome() {
     </div>
   );
 }
+
+

@@ -40,13 +40,13 @@ function normalizeType(oldType = "", oldCategory = "", name = "") {
   }
 
   if (
-    t === "agro & bio chemical" ||
+    t === "agrochemicals" ||
     t === "agro" ||
     t === "bio chemical" ||
     t === "agro chemical" ||
     t === "agrochemical"
   ) {
-    return "AGRO & Bio Chemical";
+    return "Agrochemicals";
   }
 
   if (
@@ -70,11 +70,11 @@ function normalizeType(oldType = "", oldCategory = "", name = "") {
       c === "agrochemical" ||
       c === "agro chemical"
     ) {
-      return "AGRO & Bio Chemical";
+      return "Agrochemicals";
     }
 
     // fallback
-    return "AGRO & Bio Chemical";
+    return "Agrochemicals";
   }
 
   if (
@@ -83,7 +83,7 @@ function normalizeType(oldType = "", oldCategory = "", name = "") {
     c === "agrochemical" ||
     c === "agro chemical"
   ) {
-    return "AGRO & Bio Chemical";
+    return "Agrochemicals";
   }
 
   // fallback smart guess
@@ -98,7 +98,7 @@ function normalizeCategory(type, oldCategory = "", name = "") {
   const c = String(oldCategory).trim().toLowerCase();
   const n = String(name).trim().toLowerCase();
 
-  if (type === "AGRO & Bio Chemical") {
+  if (type === "Agrochemicals") {
     return "";
   }
 

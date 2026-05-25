@@ -69,7 +69,7 @@ const productSchema = new mongoose.Schema(
 
     type: {
       type: String,
-      enum: ["Human", "Veterinary", "AGRO Bio Chemical"],
+      enum: ["Human", "Veterinary", "AGRO Bio Chemical", "Agrochemicals"],
       default: "Human",
     },
 
@@ -79,3 +79,4 @@ const productSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("Product", productSchema);
+

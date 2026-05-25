@@ -276,10 +276,10 @@ const HUMAN_CATEGORIES = [
   "Injections",
   "Drops",
   "Syrups",
-  "Shampoo",
+  "Shampoos",
   "Creams",
   "Infusions",
-  "Disposals",
+  "Disposables",
 ];
 
 const VETERINARY_CATEGORIES = [
@@ -288,10 +288,10 @@ const VETERINARY_CATEGORIES = [
   "Oral Syrups",
 ];
 
-const TYPES = ["Human", "Veterinary", "AGRO Bio Chemical"];
+const TYPES = ["Human", "Veterinary", "Agrochemicals"];
 
 function normalizeCategory(type, category) {
-  if (type === "AGRO Bio Chemical") return "";
+  if (type === "Agrochemicals") return "";
 
   if (type === "Human") {
     return HUMAN_CATEGORIES.includes(category) ? category : "Tablets";

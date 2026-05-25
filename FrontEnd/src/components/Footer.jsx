@@ -33,14 +33,14 @@
 //                   AL-Ain Pharmaceutical
 //                 </h3>
 //                 <p className="text-sm text-slate-300">
-//                   Human • Veterinary • Agro Bio Chemical
+//                   Human • Veterinary • AGRO Bio Chemical
 //                 </p>
 //               </div>
 //             </div>
 
 //             <p className="max-w-sm text-sm leading-6 text-slate-300">
 //               Trusted pharmaceutical solutions for human health, veterinary care,
-//               and agro bio chemical support across Somalia.
+//               and AGRO Bio Chemical support across Somalia.
 //             </p>
 
 //             <a
@@ -194,14 +194,14 @@ export default function Footer() {
                   AL-Ain Pharmaceutical
                 </h3>
                 <p className="text-sm text-slate-300">
-                  Human • Veterinary • Agro Bio Chemical
+                  Human • Veterinary • AGRO Bio Chemical
                 </p>
               </div>
             </div>
 
             <p className="max-w-sm text-sm leading-6 text-slate-300">
               Trusted pharmaceutical solutions for human health, veterinary care,
-              and agro bio chemical support across Somalia.
+              and AGRO Bio Chemical support across Somalia.
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
@@ -317,3 +317,6 @@ export default function Footer() {
     </footer>
   );
 }
+
+
+

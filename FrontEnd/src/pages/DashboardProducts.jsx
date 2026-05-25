@@ -36,7 +36,7 @@
 //   }, []);
 
 //   const categories = useMemo(() => {
-//     if (type === "AGRO & Bio Chemical") return ["All"];
+//     if (type === "AGRO Bio Chemical") return ["All"];
 
 //     const source =
 //       type === "All" ? items : items.filter((p) => p.type === type);
@@ -55,7 +55,7 @@
 //       list = list.filter((p) => p.type === type);
 //     }
 
-//     if (type !== "AGRO & Bio Chemical" && category !== "All") {
+//     if (type !== "AGRO Bio Chemical" && category !== "All") {
 //       list = list.filter((p) => p.category === category);
 //     }
 
@@ -91,7 +91,7 @@
 //         <div>
 //           <h1 className="text-3xl font-black text-slate-900">Products</h1>
 //           <p className="text-slate-500 mt-1">
-//             Manage all Human, Veterinary, and AGRO & Bio Chemical products.
+//             Manage all Human, Veterinary, and AGRO Bio Chemical products.
 //           </p>
 //         </div>
 
@@ -107,7 +107,7 @@
 //       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm mb-6">
 //         <div
 //           className={`grid grid-cols-1 gap-4 ${
-//             type === "AGRO & Bio Chemical" ? "md:grid-cols-2" : "md:grid-cols-3"
+//             type === "AGRO Bio Chemical" ? "md:grid-cols-2" : "md:grid-cols-3"
 //           }`}
 //         >
 //           <div className="relative">
@@ -134,10 +134,10 @@
 //             <option value="All">All Types</option>
 //             <option value="Human">Human</option>
 //             <option value="Veterinary">Veterinary</option>
-//             <option value="AGRO & Bio Chemical">AGRO & Bio Chemical</option>
+//             <option value="AGRO Bio Chemical">AGRO Bio Chemical</option>
 //           </select>
 
-//           {type !== "AGRO & Bio Chemical" && (
+//           {type !== "AGRO Bio Chemical" && (
 //             <select
 //               value={category}
 //               onChange={(e) => setCategory(e.target.value)}
@@ -239,19 +239,24 @@
 
 
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import api, { productImageUrl } from "../api/client";
 import toast from "react-hot-toast";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 import { motion } from "framer-motion";
 
+const isAgroType = (type = "") =>
+  ["agrochemicals", "agro bio chemical"].includes(type.toLowerCase());
+
 export default function DashboardProducts() {
+  const [searchParams] = useSearchParams();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [q, setQ] = useState("");
-  const [type, setType] = useState("All");
+  const [type, setType] = useState(searchParams.get("type") || "All");
   const [category, setCategory] = useState("All");
+  const selectedType = type === "Agrochemicals" ? "AGRO Bio Chemical" : type;
 
   const loadProducts = async () => {
     try {
@@ -270,23 +275,31 @@ export default function DashboardProducts() {
   }, []);
 
   const categories = useMemo(() => {
-    if (type === "AGRO Bio Chemical") return ["All"];
+    if (selectedType === "AGRO Bio Chemical") return ["All"];
 
     const source =
-      type === "All" ? items : items.filter((p) => p.type === type);
+      selectedType === "All"
+        ? items
+        : items.filter((p) =>
+            selectedType === "AGRO Bio Chemical" ? isAgroType(p.type) : p.type === selectedType
+          );
 
     const uniq = Array.from(
       new Set(source.map((p) => p.category).filter(Boolean))
     );
 
     return ["All", ...uniq];
-  }, [items, type]);
+  }, [items, selectedType]);
 
   const filtered = useMemo(() => {
     let list = [...items];
 
-    if (type !== "All") list = list.filter((p) => p.type === type);
-    if (type !== "AGRO Bio Chemical" && category !== "All") {
+    if (selectedType !== "All") {
+      list = list.filter((p) =>
+        selectedType === "AGRO Bio Chemical" ? isAgroType(p.type) : p.type === selectedType
+      );
+    }
+    if (selectedType !== "AGRO Bio Chemical" && category !== "All") {
       list = list.filter((p) => p.category === category);
     }
 
@@ -301,7 +314,7 @@ export default function DashboardProducts() {
     }
 
     return list;
-  }, [items, q, type, category]);
+  }, [items, q, selectedType, category]);
 
   const onDelete = async (id) => {
     const ok = window.confirm("Are you sure?");
@@ -362,10 +375,10 @@ export default function DashboardProducts() {
             <option>All</option>
             <option>Human</option>
             <option>Veterinary</option>
-            <option>AGRO Bio Chemical</option>
+            <option value="AGRO Bio Chemical">Agrochemicals</option>
           </select>
 
-          {type !== "AGRO Bio Chemical" && (
+          {selectedType !== "AGRO Bio Chemical" && (
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -463,3 +476,5 @@ export default function DashboardProducts() {
     </div>
   );
 }
+
+

@@ -67,36 +67,47 @@ const products = [
 ];
 
 const admins = [
-  { name: "Admin", email: "admin@example.com" },
-  { name: "Admin", email: "admin@gmail.com" },
-  { name: "abdinasir", email: "abdinasirabuukar@gmail.com" },
+  { name: "alainpharma", email: "alainpharma@gmail.com" },
 ];
 
 const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/alain_pharma";
 const dbName = process.env.MONGO_DB_NAME || "alain_pharma";
-const adminPassword = process.env.SEED_ADMIN_PASSWORD || "Admin@123456";
+const adminPassword = process.env.SEED_ADMIN_PASSWORD;
 
 async function seed() {
   await mongoose.connect(mongoUri, { dbName });
 
-  const password = await bcrypt.hash(adminPassword, 10);
+  for (const admin of admins) {
+    const email = admin.email.toLowerCase();
+    const existingAdmin = await User.findOne({ email });
 
-  await Promise.all(
-    admins.map((admin) =>
-      User.updateOne(
-        { email: admin.email.toLowerCase() },
+    if (existingAdmin) {
+      await User.updateOne(
+        { email },
         {
           $set: {
             name: admin.name,
-            email: admin.email.toLowerCase(),
-            password,
+            email,
             role: "admin",
           },
-        },
-        { upsert: true }
-      )
-    )
-  );
+        }
+      );
+      continue;
+    }
+
+    if (!adminPassword) {
+      console.warn(`Skipped creating ${email}: SEED_ADMIN_PASSWORD is not set.`);
+      continue;
+    }
+
+    const password = await bcrypt.hash(adminPassword, 10);
+    await User.create({
+      name: admin.name,
+      email,
+      password,
+      role: "admin",
+    });
+  }
 
   await Promise.all(
     products.map((product) =>
@@ -108,10 +119,12 @@ async function seed() {
     )
   );
 
-  console.log(`Seed complete: ${products.length} products and ${admins.length} admin users.`);
+  console.log(`Seed complete: ${products.length} products and ${admins.length} admin user.`);
   console.log(`MongoDB database: ${dbName}`);
-  console.log(`Admin login email: ${admins[1].email}`);
-  console.log(`Admin login password: ${adminPassword}`);
+  console.log(`Admin login email: ${admins[0].email}`);
+  if (adminPassword) {
+    console.log("Admin login password: loaded from SEED_ADMIN_PASSWORD");
+  }
 
   await mongoose.disconnect();
 }
@@ -121,3 +134,5 @@ seed().catch(async (error) => {
   await mongoose.disconnect();
   process.exit(1);
 });
+
+

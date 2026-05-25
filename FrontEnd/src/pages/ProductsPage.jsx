@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { Link, useSearchParams } from "react-router-dom";
 import api, { productImageUrl } from "../api/client";
 
+const isAgroType = (type = "") =>
+  ["agrochemicals", "agro bio chemical"].includes(type.toLowerCase());
+
 export default function ProductsPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,6 +13,7 @@ export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const typeParam = searchParams.get("type") || "All";
+  const selectedType = typeParam === "Agrochemicals" ? "AGRO Bio Chemical" : typeParam;
   const catParam = searchParams.get("cat") || "All";
   const qParam = searchParams.get("q") || "";
 
@@ -33,30 +37,36 @@ export default function ProductsPage() {
   }, []);
 
   const categories = useMemo(() => {
-    if (typeParam === "AGRO Bio Chemical") return ["All"];
+    if (selectedType === "AGRO Bio Chemical") return ["All"];
 
     const base =
-      typeParam === "All"
+      selectedType === "All"
         ? items
-        : items.filter((p) => p.type?.toLowerCase() === typeParam.toLowerCase());
+        : items.filter((p) =>
+            selectedType === "AGRO Bio Chemical"
+              ? isAgroType(p.type)
+              : p.type?.toLowerCase() === selectedType.toLowerCase()
+          );
 
     const uniq = Array.from(
       new Set(base.map((p) => p.category).filter(Boolean))
     );
 
     return ["All", ...uniq];
-  }, [items, typeParam]);
+  }, [items, selectedType]);
 
   const filtered = useMemo(() => {
     let list = [...items];
 
-    if (typeParam !== "All") {
-      list = list.filter(
-        (p) => p.type?.toLowerCase() === typeParam.toLowerCase()
+    if (selectedType !== "All") {
+      list = list.filter((p) =>
+        selectedType === "AGRO Bio Chemical"
+          ? isAgroType(p.type)
+          : p.type?.toLowerCase() === selectedType.toLowerCase()
       );
     }
 
-    if (typeParam !== "AGRO Bio Chemical" && cat !== "All") {
+    if (selectedType !== "AGRO Bio Chemical" && cat !== "All") {
       list = list.filter((p) => p.category === cat);
     }
 
@@ -71,7 +81,7 @@ export default function ProductsPage() {
     }
 
     return list;
-  }, [items, cat, q, typeParam]);
+  }, [items, cat, q, selectedType]);
 
   const updateParams = (next = {}) => {
     const params = new URLSearchParams(searchParams);
@@ -96,7 +106,9 @@ export default function ProductsPage() {
             animate={{ y: 0, opacity: 1 }}
             className="text-3xl sm:text-4xl font-extrabold text-slate-900"
           >
-            {typeParam !== "All" ? `${typeParam} Products` : "All Products"}
+            {selectedType !== "All"
+              ? `${selectedType === "AGRO Bio Chemical" ? "Agrochemicals" : selectedType} Products`
+              : "All Products"}
           </motion.h1>
 
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
@@ -107,7 +119,7 @@ export default function ProductsPage() {
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-6 mb-8">
           <div
             className={`grid gap-4 ${
-              typeParam === "AGRO Bio Chemical" ? "md:grid-cols-2" : "md:grid-cols-3"
+              selectedType === "AGRO Bio Chemical" ? "md:grid-cols-2" : "md:grid-cols-3"
             }`}
           >
             <input
@@ -121,17 +133,17 @@ export default function ProductsPage() {
             />
 
             <select
-              value={typeParam}
+              value={selectedType}
               onChange={(e) => updateParams({ type: e.target.value, cat: "All" })}
               className="border border-gray-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-green-400"
             >
               <option value="All">All Types</option>
               <option value="Human">Human</option>
               <option value="Veterinary">Veterinary</option>
-              <option value="AGRO Bio Chemical">AGRO Bio Chemical</option>
+              <option value="AGRO Bio Chemical">Agrochemicals</option>
             </select>
 
-            {typeParam !== "AGRO Bio Chemical" && (
+            {selectedType !== "AGRO Bio Chemical" && (
               <select
                 value={cat}
                 onChange={(e) => {
@@ -150,7 +162,7 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {typeParam !== "AGRO Bio Chemical" && (
+        {selectedType !== "AGRO Bio Chemical" && (
           <div className="flex flex-wrap gap-3 mb-8">
             {categories.map((c) => (
               <button
@@ -229,3 +241,5 @@ export default function ProductsPage() {
     </div>
   );
 }
+
+

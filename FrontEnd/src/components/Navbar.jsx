@@ -430,7 +430,7 @@ export default function Navbar() {
                   AL-Ain Pharmaceutical
                 </h1>
                 <p className="text-sm sm:text-medium text-slate-500">
-                  Human • Veterinary • Agro Bio Chemical
+                  Human • Veterinary • Agrochemicals
                 </p>
               </div>
             </NavLink>
@@ -535,10 +535,10 @@ export default function Navbar() {
 
                             <li>
                               <NavLink
-                                to="/products?type=Human&cat=Shampoo"
+                                to="/products?type=Human&cat=Shampoos"
                                 className="flex items-center gap-2 text-slate-700 hover:text-green-700"
                               >
-                                🧴 Shampoo
+                                🧴 Shampoos
                               </NavLink>
                             </li>
 
@@ -562,10 +562,10 @@ export default function Navbar() {
 
                             <li>
                               <NavLink
-                                to="/products?type=Human&cat=Disposals"
+                                to="/products?type=Human&cat=Disposables"
                                 className="flex items-center gap-2 text-slate-700 hover:text-green-700"
                               >
-                                🗑 Disposals
+                                🗑 Disposables
                               </NavLink>
                             </li>
                           </ul>
@@ -614,22 +614,22 @@ export default function Navbar() {
 
                         <div className="rounded-2xl bg-lime-50/70 p-4">
                           <NavLink
-                            to="/products?type=AGRO%20Bio%20Chemical"
+                            to="/products?type=Agrochemicals"
                             className="block text-base font-bold text-slate-900 mb-4"
                           >
-                            AGRO Bio Chemical
+                            Agrochemicals
                           </NavLink>
 
                           <p className="text-sm text-slate-600 leading-7">
-                            Browse our Agro Bio Chemical products directly from
+                            Browse our Agrochemicals products directly from
                             this section.
                           </p>
 
                           <NavLink
-                            to="/products?type=AGRO%20Bio%20Chemical"
+                            to="/products?type=Agrochemicals"
                             className="mt-4 inline-flex rounded-xl bg-green-400 px-4 py-2 text-sm font-semibold text-white hover:bg-green-500 transition"
                           >
-                            View AGRO Products
+                            View Agrochemicals Products
                           </NavLink>
                         </div>
                       </div>
@@ -707,11 +707,11 @@ export default function Navbar() {
                         </NavLink>
 
                         <NavLink
-                          to="/products?type=AGRO%20Bio%20Chemical"
+                          to="/products?type=Agrochemicals"
                           className="flex items-center rounded-2xl bg-white px-4 py-3 text-[16px] font-medium text-slate-700 shadow-sm transition hover:scale-[1.02] hover:bg-green-100"
                           onClick={closeMobile}
                         >
-                          🌱 Agro Biochemical
+                          🌱 Agrochemicals
                         </NavLink>
                       </div>
                     </div>

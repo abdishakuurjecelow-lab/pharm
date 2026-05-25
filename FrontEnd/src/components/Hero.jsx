@@ -683,7 +683,7 @@ export default function HeroSection() {
 //     },
 //     {
 //       image: "/hero/hero3.jpg",
-//       title: "Advanced Agro Bio Chemical",
+//       title: "Advanced AGRO Bio Chemical",
 //     },
 //   ];
 
@@ -754,3 +754,4 @@ export default function HeroSection() {
 //     </section>
 //   );
 // }
+

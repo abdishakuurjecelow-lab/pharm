@@ -25,7 +25,11 @@ export const uploadUrl = (filename) =>
     ? "/placeholder.png"
     : `${API_ORIGIN}/api/image?name=${encodeURIComponent(filename)}`;
 export const productImageUrl = (product) =>
-  !product?.image ? "/placeholder.png" : product.imageUrl || uploadUrl(product.image);
+  !product?.image
+    ? "/placeholder.png"
+    : product.imageUrl?.startsWith("/")
+    ? `${API_ORIGIN}${product.imageUrl}`
+    : product.imageUrl || uploadUrl(product.image);
 
 const api = axios.create({ baseURL: `${API_ORIGIN}/api` });
 

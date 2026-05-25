@@ -9,7 +9,7 @@
 //   const from = location.state?.from?.pathname || "/dashboard";
 
 //   // ✅ New default admin email
-//   const [email] = useState("admin@gmail.com");
+//   const [email] = useState("alainpharma@gmail.com");
 
 //   const [password, setPassword] = useState("");
 //   const [err, setErr] = useState("");
