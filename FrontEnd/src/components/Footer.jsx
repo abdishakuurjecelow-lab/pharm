@@ -194,14 +194,14 @@ export default function Footer() {
                   AL-Ain Pharmaceutical
                 </h3>
                 <p className="text-sm text-slate-300">
-                  Human • Veterinary • AGRO Bio Chemical
+                  Human • Veterinary • Agrochemicals
                 </p>
               </div>
             </div>
 
             <p className="max-w-sm text-sm leading-6 text-slate-300">
               Trusted pharmaceutical solutions for human health, veterinary care,
-              and AGRO Bio Chemical support across Somalia.
+              and Agrochemical support across Somalia.
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
@@ -259,7 +259,7 @@ export default function Footer() {
                   to="/products?type=AGRO%20Bio%20Chemical"
                   className="hover:text-green-300 transition"
                 >
-                  AGRO Bio Chemical
+                  Agrochemicals
                 </Link>
               </li>
             </ul>

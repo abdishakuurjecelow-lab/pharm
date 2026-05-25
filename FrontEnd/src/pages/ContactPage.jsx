@@ -436,7 +436,7 @@ import {
 } from "react-icons/fa";
 
 const CONTACT = {
-  landline: "655315",
+  landline: "+252655315 / +252655320",
   whatsapp: "+252615896669",
   whatsappPlain: "252615896669",
   email: "aphco655315@gmail.com",
