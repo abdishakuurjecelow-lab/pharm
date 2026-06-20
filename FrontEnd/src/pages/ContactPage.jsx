@@ -439,7 +439,7 @@ const CONTACT = {
   landline: "+252655315 / +252655320",
   whatsapp: "+252615896669",
   whatsappPlain: "252615896669",
-  email: "aphco655315@gmail.com",
+  email: "info@al-ainpharma.com",
   facebook: "https://www.facebook.com/share/176wy4LsJ9/?mibextid=wwXIfr",
   location: "Mogadishu, Somalia",
   mapQuery: "Mogadishu, Somalia",

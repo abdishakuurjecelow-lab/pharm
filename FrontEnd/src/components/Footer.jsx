@@ -292,10 +292,10 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <FaEnvelope className="mt-1 text-green-300" />
                 <a
-                  href="mailto:aphco655315@gmail.com"
+                  href="mailto:info@al-ainpharma.com"
                   className="hover:text-green-300 transition break-all"
                 >
-                  aphco655315@gmail.com
+                  info@al-ainpharma.com
                 </a>
               </li>
 
